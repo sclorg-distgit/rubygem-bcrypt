@@ -6,7 +6,7 @@
 Summary: Wrapper around bcrypt() password hashing algorithm
 Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 3.1.10
-Release: 5%{?dist}
+Release: 6%{?dist}
 Group: Development/Languages
 # ext/* - Public Domain
 # spec/TestBCrypt.java - ISC
@@ -56,6 +56,7 @@ rm -rf %{buildroot}%{gem_instdir}/ext/
 
 %check
 %{?scl:scl enable %{scl} - << \EOF}
+set -e
 pushd .%{gem_instdir}
 rspec -I$(dirs +1)%{gem_extdir_mri} spec
 popd
@@ -80,6 +81,9 @@ popd
 %{gem_instdir}/spec
 
 %changelog
+* Wed Apr 06 2016 Pavel Valena <pvalena@redhat.com> - 3.1.10-6
+- Fix: build should fail on test failure
+
 * Mon Feb 22 2016 Pavel Valena <pvalena@redhat.com> - 3.1.10-5
 - Update to 3.1.10
 
